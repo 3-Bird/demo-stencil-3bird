@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface HelloWorld {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -20,19 +22,38 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface ReactWrapper {
+        "message": string;
+    }
 }
 declare global {
+    interface HTMLHelloWorldElement extends Components.HelloWorld, HTMLStencilElement {
+    }
+    var HTMLHelloWorldElement: {
+        prototype: HTMLHelloWorldElement;
+        new (): HTMLHelloWorldElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLReactWrapperElement extends Components.ReactWrapper, HTMLStencilElement {
+    }
+    var HTMLReactWrapperElement: {
+        prototype: HTMLReactWrapperElement;
+        new (): HTMLReactWrapperElement;
+    };
     interface HTMLElementTagNameMap {
+        "hello-world": HTMLHelloWorldElement;
         "my-component": HTMLMyComponentElement;
+        "react-wrapper": HTMLReactWrapperElement;
     }
 }
 declare namespace LocalJSX {
+    interface HelloWorld {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -47,15 +68,22 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface ReactWrapper {
+        "message"?: string;
+    }
     interface IntrinsicElements {
+        "hello-world": HelloWorld;
         "my-component": MyComponent;
+        "react-wrapper": ReactWrapper;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "hello-world": LocalJSX.HelloWorld & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "react-wrapper": LocalJSX.ReactWrapper & JSXBase.HTMLAttributes<HTMLReactWrapperElement>;
         }
     }
 }

@@ -18,7 +18,7 @@
   },
   "include": [
     "src"
-  ],
+, "angular"  ],
   "exclude": [
     "node_modules"
   ]
